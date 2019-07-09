@@ -1,0 +1,120 @@
+@import '~@/styles/shared/_settings.scss';
+
+.modal {
+  $color-body: #eaeaea;
+  $color-header-overlay: rgba(0, 0, 0, 0.6);
+  $margin: 42px;
+  $padding: 20px;
+
+  display: none;
+  &--active {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-overlay;
+  }
+
+  &__content {
+    max-width: 728px;
+    background: $color-body;
+    position: relative;
+  }
+
+  &__header {
+    position: relative;
+  }
+
+  &__header-cover {
+    position: relative;
+    @include from-breakpoint('md') {
+      position: absolute;
+    }
+    line-height: 0;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  &__header-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $color-header-overlay;
+    @include from-breakpoint('md') {
+      background: linear-gradient(to right, $color-header-overlay 0%, transparent 62%, transparent 100%);
+    }
+  }
+
+  &__header-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: $padding;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    @include from-breakpoint('md') {
+      position: relative;
+      padding: $margin;
+      justify-content: flex-start;
+    }
+  }
+
+  &__header-subtitle {
+    display: none;
+    @include from-breakpoint('md') {
+      margin-bottom: 0.67em;
+      display: block;
+      font: 800 18px/20px 'Open Sans', sans-serif;
+      color: $color-primary;
+      text-transform: uppercase;
+    }
+  }
+
+  &__header-title {
+    margin: 0;
+    font: 800 28px/32px 'Open Sans', sans-serif;
+    @include from-breakpoint('md') {
+      font: 800 48px/46px 'Open Sans', sans-serif;
+    }
+    color: $color-text--contrast;
+  }
+
+  &__body {
+    position: relative;
+    @include from-breakpoint('md') {
+      margin: 0 $margin $margin;
+    }
+    padding: $padding;
+    background: $color-background;
+  }
+
+  &__close {
+    $button-size: 32px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: $button-size;
+    height: $button-size;
+    @include from-breakpoint('md') {
+      width: $margin;
+      height: $margin;
+    }
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: $color-overlay;
+    color: $color-overlay;
+    cursor: pointer;
+  }
+}
