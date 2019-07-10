@@ -1,4 +1,4 @@
-import './index.scss';
+import './modal.scss';
 import * as utils from '@/utils';
 
 const toggleButtonNodeList = document.querySelectorAll('[data-modal-toggle-button]');

@@ -1,4 +1,4 @@
 import { importAll } from '@/utils';
-import './index.scss';
+import './icon.scss';
 
 importAll(require.context('.', true, /\.svg$/));

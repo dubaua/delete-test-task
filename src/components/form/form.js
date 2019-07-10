@@ -1,4 +1,4 @@
-import './index.scss';
+import './form.scss';
 import Field from './field.js';
 import * as utils from '@/utils';
 

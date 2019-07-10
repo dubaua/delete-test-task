@@ -1,5 +1,5 @@
 import './components/index.js';
-import './styles/index.scss';
+import './styles/main.scss';
 
 console.log('entry');
 const arr = [1, 2, 3];

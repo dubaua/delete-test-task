@@ -1,3 +1,3 @@
-import './modal/index.js';
-import './icon/index.js';
-import './form/index.js';
+import './modal/modal.js';
+import './icon/icon.js';
+import './form/form.js';
