@@ -5,6 +5,7 @@
   $color-header-overlay: rgba(0, 0, 0, 0.6);
   $margin: 42px;
   $padding: 20px;
+  $padding-md: 40px;
 
   display: none;
   &--active {
@@ -92,10 +93,11 @@
 
   &__body {
     position: relative;
+    padding: $padding;
     @include from-breakpoint('md') {
       margin: 0 $margin $margin;
+      padding: $padding-md;
     }
-    padding: $padding;
     background: $color-background;
   }
 
