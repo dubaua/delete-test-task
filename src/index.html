@@ -39,22 +39,40 @@
             </div>
             <div class="row">
               <div class="col col-xs-2">
-                Select education
-                <!-- <div class="field" data-field data-field-required>
-                  <label for="education" class="field__label">I am an</label>
-                  <select name="education" id="education" class="field__original">
-                    <option value="0" disabled selected>Select education</option>
-                    <option value="1">Undergraduate</option>
-                    <option value="2">Bachelor</option>
-                    <option value="3">Super Edge Lord</option>
-                  </select>
-                  <div class="field__select">
-                    <div class="field__option" data-field-value="0">Select education</div>
-                    <div class="field__option" data-field-value="1">Undergraduate</div>
-                    <div class="field__option" data-field-value="2">Bachelor</div>
-                    <div class="field__option" data-field-value="3">Super Edge Lord</div>
+                <div
+                  class="field"
+                  data-field
+                >
+                  <div class="field__body">
+                    <select name="education" id="education" class="field__original" data-field-original>
+                      <option value="" disabled selected>Select education</option>
+                      <option value="1">Undergraduate</option>
+                      <option value="2">Bachelor</option>
+                      <option value="3">Super Edge Lord</option>
+                    </select>
+                    <label for="education" class="field__label">I am an</label>
+                    <div class="field__select">
+                      <div class="field__option" data-field-value="0">Select education</div>
+                      <div class="field__option" data-field-value="1">Undergraduate</div>
+                      <div class="field__option" data-field-value="2">Bachelor</div>
+                      <div class="field__option" data-field-value="3">Super Edge Lord</div>
+                    </div>
+                    <div class="field__frame"></div>
+                    <div class="field__status">
+                      <div class="field__icon field__icon--success icon">
+                        <svg>
+                          <use xlink:href="#success"></use>
+                        </svg>
+                      </div>
+                      <div class="field__icon field__icon--error icon">
+                        <svg>
+                          <use xlink:href="#error"></use>
+                        </svg>
+                      </div>
+                    </div>
                   </div>
-                </div> -->
+                  <div class="field__errors" data-field-errors></div>
+                </div>
               </div>
             </div>
             <div class="row">

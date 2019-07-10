@@ -1,6 +1,6 @@
 import Field from "./field.js";
 
-export default class Input extends Field {
+export default class Select extends Field {
   constructor(fieldNode) {
     super(fieldNode);
   }
