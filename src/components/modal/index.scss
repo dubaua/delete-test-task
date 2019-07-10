@@ -15,9 +15,14 @@
     right: 0;
     left: 0;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     background: $color-overlay;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    @include from-breakpoint('md') {
+      padding: 42px 0;
+    }
   }
 
   &__content {
