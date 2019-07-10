@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800&display=swap" rel="stylesheet" />
-    <title>webpack 4 quickstart</title>
+    <title>Delete Test Task</title>
   </head>
   <body>
     <button data-modal-toggle-button>Toggle Modal Form</button>
-    <div class="modal" data-modal>
+    <div class="modal modal--active" data-modal>
       <div class="modal__content">
         <div class="modal__header">
           <div class="modal__header-cover">
@@ -38,25 +38,141 @@
               </h2>
             </div>
             <div class="row">
-              <div class="col col-xs-2">Im</div>
+              <div class="col col-xs-2">
+                Select education
+                <!-- <div class="field" data-field data-field-required>
+                  <label for="education" class="field__label">I am an</label>
+                  <select name="education" id="education" class="field__original">
+                    <option value="0" disabled selected>Select education</option>
+                    <option value="1">Undergraduate</option>
+                    <option value="2">Bachelor</option>
+                    <option value="3">Super Edge Lord</option>
+                  </select>
+                  <div class="field__select">
+                    <div class="field__option" data-field-value="0">Select education</div>
+                    <div class="field__option" data-field-value="1">Undergraduate</div>
+                    <div class="field__option" data-field-value="2">Bachelor</div>
+                    <div class="field__option" data-field-value="3">Super Edge Lord</div>
+                  </div>
+                </div> -->
+              </div>
             </div>
             <div class="row">
-              <div class="col col-xs-2">Campus</div>
+              <div class="col col-xs-2">
+                Campus
+                <!-- <div class="field" data-field data-field-required>
+                  <label for="campus" class="field__label">Campus</label>
+                  <select name="campus" id="campus" class="field__original">
+                    <option value="0" disabled selected>Select campus</option>
+                    <option value="1">Colchester Campus</option>
+                    <option value="2">Super Edge Campus</option>
+                  </select>
+                  <div class="field__select">
+                    <div class="field__option" data-field-value="0">Select campus</div>
+                    <div class="field__option" data-field-value="1">Colchester Campus</div>
+                    <div class="field__option" data-field-value="2">Super Edge Campus</div>
+                  </div>
+                </div> -->
+              </div>
             </div>
             <div class="row">
               <div class="col col-xs-2 col-md-1">Date</div>
             </div>
             <div class="row">
-              <div class="col col-xs-2 col-md-1">First</div>
-              <div class="col col-xs-2 col-md-1">Last</div>
+              <div class="col col-xs-2 col-md-1">
+                <div
+                  class="field"
+                  data-field
+                  data-field-required
+                  data-field-required-message="First name is required"
+                  data-field-min-length="2"
+                  data-field-min-length-message="Da two lettaz or moar!"
+                  data-field-max-length="10"
+                >
+                  <div class="field__body">
+                    <input name="first-name" id="first-name" class="field__input field__original" data-field-original />
+                    <label for="first-name" class="field__label">First Name*</label>
+                    <div class="field__frame"></div>
+                    <div class="field__status">
+                      <div class="field__icon field__icon--success icon">
+                        <svg>
+                          <use xlink:href="#success"></use>
+                        </svg>
+                      </div>
+                      <div class="field__icon field__icon--error icon">
+                        <svg>
+                          <use xlink:href="#error"></use>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field__errors" data-field-errors></div>
+                </div>
+              </div>
+              <div class="col col-xs-2 col-md-1">
+                <div
+                  class="field"
+                  data-field
+                  data-field-required
+                  data-field-required-message="Last name is required"
+                  data-field-regex="^[a-zA-Z]+$"
+                  data-field-regex-message="Only letters"
+                >
+                  <div class="field__body">
+                    <input
+                      name="last-name"
+                      id="last-name"
+                      class="field__input field__original"
+                      value="Superkek"
+                      data-field-original
+                    />
+                    <label for="last-name" class="field__label">Last Name*</label>
+                    <div class="field__frame"></div>
+                    <div class="field__status">
+                      <div class="field__icon field__icon--success icon">
+                        <svg>
+                          <use xlink:href="#success"></use>
+                        </svg>
+                      </div>
+                      <div class="field__icon field__icon--error icon">
+                        <svg>
+                          <use xlink:href="#error"></use>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field__errors" data-field-errors></div>
+                </div>
+              </div>
             </div>
             <div class="row">
-              <div class="col col-xs-2">email</div>
+              <div class="col col-xs-2">
+                <div class="field" data-field data-field-required>
+                  <div class="field__body">
+                    <input name="email" id="email" class="field__input field__original" data-field-original />
+                    <label for="email" class="field__label">Email*</label>
+                    <div class="field__frame"></div>
+                    <div class="field__status">
+                      <div class="field__icon field__icon--success icon">
+                        <svg>
+                          <use xlink:href="#success"></use>
+                        </svg>
+                      </div>
+                      <div class="field__icon field__icon--error icon">
+                        <svg>
+                          <use xlink:href="#error"></use>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field__errors" data-field-errors></div>
+                </div>
+              </div>
             </div>
             <div class="row">
               <div class="col col-xs-2">Updates checkbox</div>
             </div>
-            <button>Make A Booking</button>
+            <button class="form__button">Make A Booking</button>
             <footer class="form__footer">
               The information provided by you will be held by the University of Essex in accordance with the
               University's Data protection Policy and may be used for the University's marketing purposes. On occasion
