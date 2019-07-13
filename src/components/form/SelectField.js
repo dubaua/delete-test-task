@@ -5,14 +5,9 @@ export default class SelectField extends BaseField {
     super(fieldNode);
   }
 
-  bindListeners() {
-    super.bindListeners();
-
-    this.onChange = this.handleChange.bind(this);
-    this.fieldOriginalNode.addEventListener('change', this.onChange, false);
-  }
-
   handleChange() {
+    super.handleChange();
+
     this.handleFilled();
     this.validate();
   }

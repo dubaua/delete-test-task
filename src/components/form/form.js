@@ -23,9 +23,13 @@ export default class Form {
     this.submitButtonNode = this.formNode.querySelector(this.selectors.submitButton);
     this.messageNode = this.formNode.querySelector(this.selectors.message);
 
-    this.validationErrorMessage = this.formNode.dataset.formValidationErrorMessage || 'Validation error';
-    this.successMessage = this.formNode.dataset.formSuccessMessage || 'Success message';
+    this.validationErrorMessage = this.formNode.dataset.formValidationErrorMessage || "Some fields isn't valid";
     this.formUrl = this.formNode.dataset.formUrl;
+
+    this.isValid = true;
+
+    // this flag show if form was tried to send
+    this.isTouched = false;
 
     this.init();
   }
@@ -62,23 +66,32 @@ export default class Form {
     this.onSumbit = this.handleSubmit.bind(this);
     this.submitButtonNode.addEventListener('click', this.onSumbit, false);
     this.formNode.addEventListener('submit', this.onSumbit, false);
+    this.onFieldChange = this.handleChange.bind(this);
+    this.formNode.addEventListener('fieldChanged', this.onFieldChange, false);
+  }
+
+  handleChange() {
+    if (this.isTouched) {
+      this.validateForm();
+    }
   }
 
   handleSubmit(event) {
-    this.validateForm();
-    const isFormValid = this.fields.every(field => field.isValid);
+    this.isTouched = true;
 
-    if (isFormValid) {
-      api.fakeSubmit({ url: this.formUrl, formData: null }).then(({ success, message }) => {
-        // render success message
-        this.renderMessage(this.successMessage, this.classnames.messageSuccess);
-      }).catch(({ success, message }) => {
-        // render backend error
-        this.renderMessage(message, this.classnames.messageError);
-      });
-    } else {
-      // render frontend validation error
-      this.renderMessage(this.validationErrorMessage, this.classnames.messageError);
+    this.validateForm();
+
+    if (this.isValid) {
+      api
+        .fakeSubmit({ url: this.formUrl, formData: null })
+        .then(({ success, message }) => {
+          // render success message
+          this.renderMessage(message, this.classnames.messageSuccess);
+        })
+        .catch(({ success, message }) => {
+          // render backend error
+          this.renderMessage(message, this.classnames.messageError);
+        });
     }
 
     event.preventDefault();
@@ -88,12 +101,31 @@ export default class Form {
     this.fields.forEach(function(field) {
       field.validate();
     });
+
+    this.isValid = this.fields.every(field => field.isValid);
+
+    if (!this.isValid) {
+      // render frontend validation error
+      this.renderMessage(this.validationErrorMessage, this.classnames.messageError);
+    } else {
+      this.clearMessage();
+    }
+  }
+
+  clearMessage() {
+    utils.removeClass(this.messageNode, this.classnames.messageError);
+    utils.removeClass(this.messageNode, this.classnames.messageSuccess);
+    this.messageNode.innerHTML = '';
   }
 
   renderMessage(message, classname) {
-    utils.removeClass(this.messageNode, this.classnames.messageError);
-    utils.removeClass(this.messageNode, this.classnames.messageSuccess);
+    this.clearMessage();
     utils.addClass(this.messageNode, classname);
     this.messageNode.innerHTML = message;
   }
 }
+
+// TODO show progress animation
+// TODO Date field
+// TODO a11y
+// TODO Write about text

@@ -33,7 +33,6 @@ export default class Field {
   init() {
     this.handleFilled();
     this.buildValidators();
-    // validate, if isn't empty
     if (this.isFilled) {
       this.validate();
     }
@@ -44,6 +43,8 @@ export default class Field {
     this.onFocus = this.handleFocus.bind(this);
     this.fieldOriginalNode.addEventListener('focus', this.onFocus, false);
     this.fieldOriginalNode.addEventListener('blur', this.onFocus, false);
+    this.onChange = this.handleChange.bind(this);
+    this.fieldOriginalNode.addEventListener('change', this.onChange, false);
   }
 
   buildValidators() {
@@ -54,6 +55,7 @@ export default class Field {
       });
     }
   }
+
   handleFocus() {
     // can't be undone
     this.isTouched = true;
@@ -76,6 +78,11 @@ export default class Field {
       this.isFilled = false;
       utils.removeClass(this.fieldNode, this.classnames.filled);
     }
+  }
+
+  handleChange() {
+    const changedEvent = new CustomEvent('fieldChanged', { bubbles: true });
+    this.fieldNode.dispatchEvent(changedEvent);
   }
 
   validate() {

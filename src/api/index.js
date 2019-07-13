@@ -5,9 +5,9 @@ export const fakeSubmit = ({ url, formData }) =>
 
     setTimeout(() => {
       if (success) {
-        resolve({ success, message: 'You will never see this message, cause it doesn\'t handling on frontend.' });
+        resolve({ success, message: 'Form was successfully sent via Fake JS API.' });
       } else {
-        reject({ success, message: 'Watch out! Fake JS API randomly threw an error! Try again.' });
+        reject({ success, message: 'Form was Fake JS API randomly threw an error! Try again.' });
       }
     }, timeout);
   });
