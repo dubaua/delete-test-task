@@ -26,12 +26,18 @@ export default class Field {
     this.buildValidators();
 
     // user has inputed something
+    this.isFilled = false;
     this.handleFilled();
 
     // user has touched field
-    this.touched = false;
+    this.isTouched = false;
 
     this.isValid = true;
+
+    // validate, if isn't empty
+    if (this.isFilled) {
+      this.validate();
+    }
 
     this.init();
   }
@@ -49,34 +55,6 @@ export default class Field {
         message: this.fieldNode.dataset.fieldRequiredMessage || 'Field is required',
       });
     }
-
-    if (this.fieldNode.hasAttribute('data-field-regex')) {
-      const regexp = new RegExp(this.fieldNode.dataset.fieldRegex, 'g');
-      this.validatorArray.push({
-        validator: x => regexp.test(x),
-        message: this.fieldNode.dataset.fieldRegexMessage || 'Invalid format',
-      });
-    }
-
-    if (this.fieldNode.hasAttribute('data-field-min-length')) {
-      const minLength = Number(this.fieldNode.dataset.fieldMinLength);
-      if (!isNaN(minLength)) {
-        this.validatorArray.push({
-          validator: x => x.length >= minLength,
-          message: this.fieldNode.dataset.fieldMinLengthMessage || `At least ${minLength} symbols`,
-        });
-      }
-    }
-
-    if (this.fieldNode.hasAttribute('data-field-max-length')) {
-      const maxLength = Number(this.fieldNode.dataset.fieldMaxLength);
-      if (!isNaN(maxLength)) {
-        this.validatorArray.push({
-          validator: x => x.length <= maxLength,
-          message: this.fieldNode.dataset.fieldMaxLengthMessage || `Up to ${maxLength} symbols`,
-        });
-      }
-    }
   }
 
   addClass(modifier) {
@@ -89,7 +67,7 @@ export default class Field {
 
   handleFocus() {
     // can't be undone
-    this.touched = true;
+    this.isTouched = true;
     this.addClass('touched');
 
     if (this.fieldOriginalNode === document.activeElement) {
@@ -103,10 +81,10 @@ export default class Field {
 
   handleFilled() {
     if (this.fieldOriginalNode.value !== '') {
-      this.filled = true;
+      this.isFilled = true;
       this.addClass('filled');
     } else {
-      this.filled = false;
+      this.isFilled = false;
       this.removeClass('filled');
     }
   }
@@ -145,21 +123,3 @@ export default class Field {
     }
   }
 }
-
-/*
-TODO
-Умеет аксессибилить
-
-Поле селект
-Умеет выбрасывать дропдаун и выбирать нативный селект по клику.
-
-field type:
-select
-text
-date
-
-ELEMENTS
-
-field dropdown
-
-*/

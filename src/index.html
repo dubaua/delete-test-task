@@ -41,7 +41,7 @@
               <div class="col col-xs-2">
                 <div
                   class="field"
-                  data-field
+                  data-field="select"
                 >
                   <div class="field__body">
                     <select name="education" id="education" class="field__original" data-field-original>
@@ -100,7 +100,7 @@
               <div class="col col-xs-2 col-md-1">
                 <div
                   class="field"
-                  data-field
+                  data-field="input"
                   data-field-required
                   data-field-required-message="First name is required"
                   data-field-min-length="2"
@@ -130,11 +130,12 @@
               <div class="col col-xs-2 col-md-1">
                 <div
                   class="field"
-                  data-field
+                  data-field="input"
                   data-field-required
                   data-field-required-message="Last name is required"
                   data-field-regex="^[a-zA-Z]+$"
                   data-field-regex-message="Only letters"
+                  data-field-max-length="10.2"
                 >
                   <div class="field__body">
                     <input
@@ -165,7 +166,7 @@
             </div>
             <div class="row">
               <div class="col col-xs-2">
-                <div class="field" data-field data-field-required>
+                <div class="field" data-field="input" data-field-required>
                   <div class="field__body">
                     <input name="email" id="email" class="field__input field__original" data-field-original />
                     <label for="email" class="field__label">Email*</label>
