@@ -20,29 +20,26 @@ export default class Field {
     this.fieldOriginalNode = this.fieldNode.querySelector(this.selectors.original);
     this.fieldErrorsNode = this.fieldNode.querySelector(this.selectors.errors);
 
-    // add validators
     this.validatorArray = [];
     this.errorMessageArray = [];
-    this.buildValidators();
-
-    // user has inputed something
     this.isFilled = false;
-    this.handleFilled();
-
-    // user has touched field
     this.isTouched = false;
-
     this.isValid = true;
-
-    // validate, if isn't empty
-    if (this.isFilled) {
-      this.validate();
-    }
 
     this.init();
   }
 
   init() {
+    this.handleFilled();
+    this.buildValidators();
+    // validate, if isn't empty
+    if (this.isFilled) {
+      this.validate();
+    }
+    this.bindListeners();
+  }
+
+  bindListeners() {
     this.onFocus = this.handleFocus.bind(this);
     this.fieldOriginalNode.addEventListener('focus', this.onFocus, false);
     this.fieldOriginalNode.addEventListener('blur', this.onFocus, false);

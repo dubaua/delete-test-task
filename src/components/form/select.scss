@@ -1,0 +1,59 @@
+@import '~@/styles/shared/_settings.scss';
+@import './field.scss';
+
+// https://github.com/filamentgroup/select-css
+
+.field {
+  $field: &;
+
+  &__original {
+    &--select {
+      & option {
+        background: $color-background;
+        font-weight: normal;
+      }
+
+      & ~ #{$field}__label {
+        transform: $field-label-transform;
+        @include from-breakpoint('md') {
+          transform: $field-label-transform-md;
+        }
+      }
+    }
+  }
+
+  &__select-arrow {
+    position: absolute;
+    right: $field-padding-x + 7px;
+    top: 15px;
+    @include from-breakpoint('md') {
+      right: $field-padding-x-md + 7px;
+      top: 21px;
+    }
+    width: 18px;
+    height: 18px;
+    color: $field-label-color;
+    // transition: transform 0.2s cubic-bezier(0, 0, 0.33, 1);
+  }
+
+  // #{$field}__original:focus ~ #{$field}__select-arrow,
+  // &--focus #{$field}__select-arrow {
+  //   transform: rotate(-180deg);
+  // }
+}
+
+/* Hide arrow icon in IE browsers */
+.field__original--select::-ms-expand {
+  display: none;
+}
+
+/* Disabled styles */
+.select-css:disabled,
+.select-css[aria-disabled='true'] {
+  color: graytext;
+}
+
+.select-css:disabled:hover,
+.select-css[aria-disabled='true'] {
+  border-color: #aaa;
+}

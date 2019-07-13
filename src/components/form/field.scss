@@ -1,31 +1,44 @@
 @import '~@/styles/shared/_settings.scss';
 
+$field-border-color: #eaeaea;
+$field-label-color: #adadad;
+$field-padding-x: 11px;
+$field-padding-x-md: 17px;
+$field-status-width: 30px;
+$field-label-transform: translate(0, -9px) scale(0.85);;
+$field-label-transform-md: translate(0, -10px) scale(0.75);;
+
 .field {
   $field: &;
-  $field-border-color: #eaeaea;
-  $field-label-color: #adadad;
-  $field-padding-x: 11px;
-  $field-padding-x-md: 17px;
-  $field-status-width: 30px;
   margin: 0 $field-status-width 20px 0;
 
   &__body {
     position: relative;
   }
 
-  &__original:focus {
-    outline: none;
-  }
-
-  &__input {
-    border: none;
+  &__original {
+    display: block;
     box-sizing: border-box;
+    max-width: 100%;
     width: 100%;
+    margin: 0;
     padding: 22px $field-padding-x 6px $field-padding-x;
-    font: 14px/24px 'Open Sans', sans-serif;
+    border: none;
+    border-radius: 0;
+    font: normal 14px/24px 'Open Sans', sans-serif;
     @include from-breakpoint('md') {
       padding: 28px $field-padding-x-md 12px $field-padding-x-md;
       font-size: 16px;
+    }
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: $color-background;
+    background-image: none;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
     }
   }
 
@@ -44,12 +57,12 @@
     color: $field-label-color;
   }
 
-  // #{$field}__original:focus ~ #{$field}__label,
+  #{$field}__original:focus ~ #{$field}__label,
   &--focus #{$field}__label,
   &--filled #{$field}__label {
-    transform: translate(0, -9px) scale(0.85);
+    transform: $field-label-transform;
     @include from-breakpoint('md') {
-      transform: translate(0, -10px) scale(0.75);
+      transform: $field-label-transform-md;
     }
   }
 
@@ -101,7 +114,7 @@
     color: $color-error;
   }
 
-  // #{$field}__original:focus ~ #{$field}__frame,
+  #{$field}__original:focus ~ #{$field}__frame,
   &--focus #{$field}__frame {
     border-color: $color-focus;
   }
