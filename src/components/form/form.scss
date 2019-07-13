@@ -16,6 +16,20 @@
       }
     }
   }
+
+  &__message {
+    &:not(:empty) {
+      margin-top: 4px;
+    }
+    font: 12px/16px 'Open Sans', sans-serif;
+    &--error {
+      color: $color-error;
+    }
+    &--success {
+      color: $color-success;
+    }
+  }
+
   &__footer {
     margin-top: 40px;
     font: 12px/18px 'Open Sans', sans-serif;

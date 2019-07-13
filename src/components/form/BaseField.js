@@ -1,4 +1,5 @@
 import './field.scss';
+import * as utils from '@/utils/index.js';
 
 export default class Field {
   constructor(fieldNode) {
@@ -53,36 +54,27 @@ export default class Field {
       });
     }
   }
-
-  addClass(modifier) {
-    this.fieldNode.classList.add(this.classnames[modifier]);
-  }
-
-  removeClass(modifier) {
-    this.fieldNode.classList.remove(this.classnames[modifier]);
-  }
-
   handleFocus() {
     // can't be undone
     this.isTouched = true;
-    this.addClass('touched');
+    utils.addClass(this.fieldNode, this.classnames.touched);
 
     if (this.fieldOriginalNode === document.activeElement) {
-      this.addClass('focus');
+      utils.addClass(this.fieldNode, this.classnames.focus);
     } else {
       this.handleFilled();
       this.validate();
-      this.removeClass('focus');
+      utils.removeClass(this.fieldNode, this.classnames.focus);
     }
   }
 
   handleFilled() {
     if (this.fieldOriginalNode.value !== '') {
       this.isFilled = true;
-      this.addClass('filled');
+      utils.addClass(this.fieldNode, this.classnames.filled);
     } else {
       this.isFilled = false;
-      this.removeClass('filled');
+      utils.removeClass(this.fieldNode, this.classnames.filled);
     }
   }
 
@@ -100,11 +92,11 @@ export default class Field {
     this.isValid = errorsArray.length === 0;
 
     if (this.isValid) {
-      this.addClass('success');
-      this.removeClass('error');
+      utils.addClass(this.fieldNode, this.classnames.success);
+      utils.removeClass(this.fieldNode, this.classnames.error);
     } else {
-      this.addClass('error');
-      this.removeClass('success');
+      utils.addClass(this.fieldNode, this.classnames.error);
+      utils.removeClass(this.fieldNode, this.classnames.success);
     }
 
     this.renderErrors();
@@ -114,7 +106,7 @@ export default class Field {
     this.fieldErrorsNode.innerHTML = '';
     for (let i = 0; i < this.errorMessageArray.length; i++) {
       const errorNode = document.createElement('div');
-      errorNode.classList.add(this.classnames.errorMessage);
+      utils.addClass(errorNode, this.classnames.errorMessage);
       errorNode.textContent = this.errorMessageArray[i];
       this.fieldErrorsNode.appendChild(errorNode);
     }

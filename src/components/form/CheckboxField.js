@@ -1,6 +1,6 @@
 import BaseField from './BaseField.js';
 
-export default class SelectField extends BaseField {
+export default class CheckboxField extends BaseField {
   constructor(fieldNode) {
     super(fieldNode);
   }
