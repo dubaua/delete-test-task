@@ -117,6 +117,10 @@ export default class Form {
           // render success message
           setTimeout(() => {
             this.renderMessage(message, this.classnames.messageSuccess);
+            // clear form in 3s
+            setTimeout(() => {
+              this.clearForm();
+            }, 3000);
           }, finishDelay);
         })
         .catch(({ success, message }) => {
@@ -164,6 +168,14 @@ export default class Form {
     this.clearMessage();
     utils.addClass(this.messageNode, classname);
     this.messageNode.innerHTML = message;
+  }
+
+  clearForm() {
+    this.clearMessage();
+    this.fields.forEach(field => {
+      field.reset();
+    });
+    this.progressNode.style.width = '';
   }
 }
 

@@ -118,4 +118,21 @@ export default class Field {
       this.fieldErrorsNode.appendChild(errorNode);
     }
   }
+
+  reset() {
+    this.errorMessageArray = [];
+    this.isFilled = false;
+    this.isTouched = false;
+    this.isValid = true;
+    this.fieldErrorsNode.innerHTML = '';
+    this.fieldOriginalNode.value = '';
+
+    utils.removeClass(this.fieldNode, [
+      this.classnames.focus,
+      this.classnames.filled,
+      this.classnames.touched,
+      this.classnames.error,
+      this.classnames.success,
+    ]);
+  }
 }

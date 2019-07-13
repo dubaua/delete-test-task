@@ -12,11 +12,19 @@ export function forEachNode(nodeList, callback) {
 export const isNatural = number => !isNaN(number) && number >= 0 && number % 1 === 0;
 
 export function addClass(node, classname) {
+  let classnames = classname;
+  if (typeof classname === 'string') {
+    classnames = [classname]
+  }
   node.classList.add(classname);
 }
 
 export function removeClass(node, classname) {
-  node.classList.remove(classname);
+  let classnames = classname;
+  if (typeof classname === 'string') {
+    classnames = [classname]
+  }
+  node.classList.remove(...classnames);
 }
 
 export function animate({ duration, timing, draw, rafLink }) {
