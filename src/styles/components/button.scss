@@ -1,6 +1,7 @@
 @import '~@/styles/shared/_settings.scss';
 
 .button {
+  position: relative;
   padding: 10px 25px;
   border: 3px solid #adadad;
   background: $color-background;
@@ -17,5 +18,18 @@
     outline: none;
     box-shadow: none;
     border-color: $color-focus;
+  }
+
+  &__text {
+    position: relative;
+  }
+
+  &__progress {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: #eaeaea;
   }
 }

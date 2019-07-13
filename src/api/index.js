@@ -1,7 +1,9 @@
+export const maxFakeApiDelay = 3000;
+
 export const fakeSubmit = ({ url, formData }) =>
   new Promise((resolve, reject) => {
     const success = Math.random() >= 0.5;
-    const timeout = Math.ceil(Math.random() * 3000);
+    const timeout = Math.ceil(Math.random() * maxFakeApiDelay);
 
     setTimeout(() => {
       if (success) {

@@ -18,3 +18,25 @@ export function addClass(node, classname) {
 export function removeClass(node, classname) {
   node.classList.remove(classname);
 }
+
+export function animate({ duration, timing, draw, rafLink }) {
+  const start = performance.now();
+
+  let raf = requestAnimationFrame(function animate(time) {
+    let timeFraction = (time - start) / duration;
+
+    if (timeFraction > 1) {
+      timeFraction = 1;
+    }
+
+    let progress = timing(timeFraction);
+
+    draw(progress);
+
+    if (timeFraction < 1) {
+      rafLink.raf = requestAnimationFrame(animate);
+    }
+  });
+
+  return raf;
+}

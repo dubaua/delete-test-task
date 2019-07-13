@@ -12,6 +12,7 @@ export default class Form {
       submitButton: '[data-form-submit-button]',
       message: '[data-form-message]',
       field: '[data-form-field]',
+      progress: '[data-form-button-progrees]',
     };
     this.classnames = {
       messageError: 'form__message--error',
@@ -22,6 +23,7 @@ export default class Form {
     this.fields = [];
     this.submitButtonNode = this.formNode.querySelector(this.selectors.submitButton);
     this.messageNode = this.formNode.querySelector(this.selectors.message);
+    this.progressNode = this.formNode.querySelector(this.selectors.progress);
 
     this.validationErrorMessage = this.formNode.dataset.formValidationErrorMessage || "Some fields isn't valid";
     this.formUrl = this.formNode.dataset.formUrl;
@@ -82,15 +84,55 @@ export default class Form {
     this.validateForm();
 
     if (this.isValid) {
+      let _progress = 0;
+
+      const rafLink = {
+        raf: null,
+      };
+
+      rafLink.raf = utils.animate({
+        duration: api.maxFakeApiDelay,
+        timing: timeFraction => Math.pow(timeFraction, 0.62),
+        draw: progress => {
+          _progress = progress;
+          this.progressNode.style.width = `${progress * 100}%`;
+        },
+        rafLink,
+      });
+
+      const finishDelay = 330;
+
       api
         .fakeSubmit({ url: this.formUrl, formData: null })
         .then(({ success, message }) => {
+          // finish animation
+          cancelAnimationFrame(rafLink.raf);
+          rafLink.raf = utils.animate({
+            duration: finishDelay,
+            timing: timeFraction => timeFraction,
+            draw: progress => (this.progressNode.style.width = `${(_progress + progress * (1 - _progress)) * 100}%`),
+            rafLink,
+          });
+
           // render success message
-          this.renderMessage(message, this.classnames.messageSuccess);
+          setTimeout(() => {
+            this.renderMessage(message, this.classnames.messageSuccess);
+          }, finishDelay);
         })
         .catch(({ success, message }) => {
-          // render backend error
-          this.renderMessage(message, this.classnames.messageError);
+          // backward animation
+          cancelAnimationFrame(rafLink.raf);
+          rafLink.raf = utils.animate({
+            duration: finishDelay,
+            timing: timeFraction => timeFraction,
+            draw: progress => (this.progressNode.style.width = `${(_progress - progress * _progress) * 100}%`),
+            rafLink,
+          });
+
+          // render error message
+          setTimeout(() => {
+            this.renderMessage(message, this.classnames.messageError);
+          }, finishDelay);
         });
     }
 
@@ -125,7 +167,6 @@ export default class Form {
   }
 }
 
-// TODO show progress animation
 // TODO Date field
 // TODO a11y
 // TODO Write about text
